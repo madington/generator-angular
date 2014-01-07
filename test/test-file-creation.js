@@ -89,6 +89,18 @@ describe('Angular generator file creation', function () {
         done();
       });
     });
+
+    it('creates typescript files', function (done) {
+      angular.env.options.typescript = true;
+      angular.run([], function () {
+        helpers.assertFiles([].concat(expected, [
+          'app/scripts/app.ts',
+          'app/scripts/controllers/main.ts',
+          'test/spec/controllers/main.ts'
+        ]));
+        done();
+      });
+    });
   });
 
   describe('Service Subgenerators', function () {

@@ -15,9 +15,11 @@ var Generator = module.exports = function Generator() {
   });
 
   var bower = require(path.join(process.cwd(), 'bower.json'));
+  var coffee = this.env.options.coffee;
+  var typescript = this.env.options.typescript;
   var match = require('fs').readFileSync(path.join(
     this.env.options.appPath,
-    'scripts/app.' + (this.env.options.coffee ? 'coffee' : 'js')
+    'scripts/app.' + (coffee ? 'coffee' : typescript ? 'ts': 'js')
   ), 'utf-8').match(/\.when/);
 
   if (
@@ -36,12 +38,13 @@ util.inherits(Generator, ScriptBase);
 
 Generator.prototype.rewriteAppJs = function () {
   var coffee = this.env.options.coffee;
+  var typescript = this.env.options.typescript;
 
   if (!this.foundWhenForRoute) {
     this.on('end', function () {
       this.log(chalk.yellow(
         '\nangular-route is not installed. Skipping adding the route to ' +
-        'scripts/app.' + (coffee ? 'coffee' : 'js')
+        'scripts/app.' + (coffee ? 'coffee' : typescript ? 'ts' : 'js')
       ));
     });
     return;
@@ -55,7 +58,7 @@ Generator.prototype.rewriteAppJs = function () {
   var config = {
     file: path.join(
       this.env.options.appPath,
-      'scripts/app.' + (coffee ? 'coffee' : 'js')
+      'scripts/app.' + (coffee ? 'coffee' : typescript ? 'ts': 'js')
     ),
     needle: '.otherwise',
     splicable: [

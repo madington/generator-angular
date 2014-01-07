@@ -40,6 +40,14 @@ module.exports = function (grunt) {
       coffeeTest: {
         files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
         tasks: ['newer:coffee:test', 'karma']
+      },<% } else if (typescript) { %>
+      typescript: {
+        files: ['<%%= yeoman.app %>/scripts/{,*/}*.ts'],
+        tasks: ['typescript:base']
+      },
+      typescriptTest: {
+        files: ['test/spec/{,*/}*.ts'],
+        tasks: ['typescript:test']
       },<% } else { %>
       js: {
         files: ['<%%= yeoman.app %>/scripts/{,*/}*.js'],
@@ -69,7 +77,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',<% if (coffee) { %>
+          '.tmp/styles/{,*/}*.css',<% if (coffee || typescript) { %>
           '.tmp/scripts/{,*/}*.js',<% } %>
           '<%%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
@@ -135,10 +143,10 @@ module.exports = function (grunt) {
       },
       all: {
         src: [
-          'Gruntfile.js'<% if (!coffee) { %>,
+          'Gruntfile.js'<% if (!coffee && !typescript) { %>,
           '<%%= yeoman.app %>/scripts/{,*/}*.js'<% } %>
         ]
-      }<% if (!coffee) { %>,
+      }<% if (!coffee && !typescript) { %>,
       test: {
         options: {
           jshintrc: 'test/.jshintrc'
@@ -250,6 +258,31 @@ module.exports = function (grunt) {
           dest: '.tmp/spec',
           ext: '.js'
         }]
+      }
+    },<% } %><% if (typescript) { %>
+
+    // Compiles TypeScript to JavaScript
+    typescript: {
+      base: {
+        src: ['<%%= yeoman.app %>/scripts/{,*/}*.ts'],
+        dest: '.tmp/scripts',
+        options: {
+          module: 'amd', //or commonjs
+          target: 'es5', //or es3
+          'base_path': '<%%= yeoman.app %>/scripts', //quoting base_path to get around jshint warning.
+          sourcemap: true,
+          declaration: true
+        }
+      },
+      test: {
+        src: ['test/spec/{,*/}*.ts', 'test/e2e/{,*/}*.ts'],
+        dest: '.tmp/spec',
+        options: {
+          module: 'amd', //or commonjs
+          target: 'es5', //or es3
+          sourcemap: true,
+          declaration: true
+        }
       }
     },<% } %><% if (compass) { %>
 
@@ -458,17 +491,20 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [<% if (coffee) { %>
-        'coffee:dist',<% } %><% if (compass) { %>
+        'coffee:dist',<% } %><% if (typescript) { %>
+        'typescript:base',<% } %><% if (compass) { %>
         'compass:server'<% } else { %>
         'copy:styles'<% } %>
       ],
       test: [<% if (coffee) { %>
-        'coffee',<% } %><% if (compass) { %>
+        'coffee',<% } %><% if (typescript) { %>
+        'typescript',<% } %><% if (compass) { %>
         'compass'<% } else { %>
         'copy:styles'<% } %>
       ],
       dist: [<% if (coffee) { %>
-        'coffee',<% } %><% if (compass) { %>
+        'coffee',<% } %><% if (typescript) { %>
+        'typescript',<% } %><% if (compass) { %>
         'compass:dist',<% } else { %>
         'copy:styles',<% } %>
         'imagemin',

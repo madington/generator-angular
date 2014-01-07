@@ -91,6 +91,18 @@ describe('Angular generator appPath option', function () {
         done();
       });
     });
+
+    it('creates typescript files', function (done) {
+      angular.env.options.typescript = true;
+      angular.run([], function () {
+        helpers.assertFiles([].concat(expected, [
+          appPath + '/scripts/app.ts',
+          appPath + '/scripts/controllers/main.ts',
+          'test/spec/controllers/main.ts'
+        ]));
+        done();
+      });
+    });
   });
 
   describe('Service Subgenerators', function () {
