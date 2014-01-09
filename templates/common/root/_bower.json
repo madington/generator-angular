@@ -12,11 +12,12 @@
     "angular-resource": "^<%= ngVer %>"<% } %><% if (routeModule) { %>,
     "angular-route": "^<%= ngVer %>"<% } %><% if (sanitizeModule) { %>,
     "angular-sanitize": "^<%= ngVer %>"<% } %><% if (touchModule) { %>,
-    "angular-touch": "^<%= ngVer %>"<% } %><% if (typescript) { %>,
-    "definitivelyTyped": "https://github.com/borisyankov/DefinitelyTyped.git"<% } %>
+    "angular-touch": "^<%= ngVer %>"<% } %>
   },
   "devDependencies": {
-    "angular-mocks": "^<%= ngVer %>"
+    "angular-mocks": "^<%= ngVer %>"<% if (typescript) { %>,
+    "dt-jasmine": "~2.0.0",
+    "dt-angular": "https://github.com/jedmao/dt-angular/archive/v1.2.0.tar.gz"<% } %>
   }<% if (appPath) { %>,
   "appPath": "<%= appPath %>"<% } %>,
   "moduleName": "<%= scriptAppName %>"
