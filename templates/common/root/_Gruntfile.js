@@ -51,7 +51,7 @@ module.exports = function (grunt) {
       },<% } else { %>
       js: {
         files: ['<%%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        tasks: ['ngdocs', 'newer:jshint:all'],
         options: {
           livereload: '<%%= connect.options.livereload %>'
         }
@@ -521,6 +521,13 @@ module.exports = function (grunt) {
           %>',
         singleRun: true
       }
+    },
+    ngdocs: {
+      options: {
+        dest: '.tmp/docs',
+        html5Mode: false
+      },
+      api: ['<%%= yeoman.app %>/scripts/{,*/}*.js'],
     }
   });
 
@@ -534,7 +541,7 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
-      'autoprefixer:server',
+      'ngdocs',
       'connect:livereload',
       'watch'
     ]);
