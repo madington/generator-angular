@@ -43,7 +43,7 @@ module.exports = function (grunt) {
       },<% } else if (typescript) { %>
       typescript: {
         files: ['<%%= yeoman.app %>/scripts/{,*/}*.ts'],
-        tasks: ['typescript:base'],
+        tasks: ['typescript:base', 'ngdocs'],
         options: {
           spawn: false
         }
