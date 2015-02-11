@@ -94,6 +94,7 @@ describe('Angular generator file creation', function () {
       angular.env.options.typescript = true;
       angular.run([], function () {
         helpers.assertFiles([].concat(expected, [
+          'tsd.json',
           'app/scripts/app.ts',
           'app/scripts/controllers/main.ts',
           'test/spec/controllers/main.ts'

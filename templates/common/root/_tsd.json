@@ -1,0 +1,37 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    <% if (animateModule) { %>
+    "angularjs/angular-animate.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },<% } %><% if (cookiesModule) { %>
+    "angularjs/angular-cookies.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },<% } %><% if (resourceModule) { %>
+    "angularjs/angular-resource.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },<% } %><% if (routeModule) { %>
+    "angularjs/angular-route.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },<% } %><% if (sanitizeModule) { %>
+    "angularjs/angular-sanitize.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },<% } %>
+    "angularjs/angular.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },
+    "angularjs/angular-mocks.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "cf7c97b2a68a385c98c75fb6edd81083c97c983c"
+    }
+  }
+}

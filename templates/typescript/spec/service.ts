@@ -1,5 +1,5 @@
-/// <reference path="../../../bower_components/dt-angular/angular-mocks.d.ts" />
-/// <reference path="../../../bower_components/dt-jasmine/jasmine.d.ts" />
+/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
+/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../../../app/scripts/services/<%= cameledName.toLowerCase() %>.ts" />
 
 'use strict';

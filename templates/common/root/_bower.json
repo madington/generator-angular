@@ -15,9 +15,7 @@
     "angular-touch": "^<%= ngVer %>"<% } %>
   },
   "devDependencies": {
-    "angular-mocks": "^<%= ngVer %>"<% if (typescript) { %>,
-    "dt-jasmine": "~2.0.0",
-    "dt-angular": "https://github.com/jedmao/dt-angular/archive/v1.2.0.tar.gz"<% } %>
+    "angular-mocks": "^<%= ngVer %>"
   }<% if (appPath) { %>,
   "appPath": "<%= appPath %>"<% } %>,
   "moduleName": "<%= scriptAppName %>"

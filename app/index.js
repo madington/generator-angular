@@ -118,6 +118,13 @@ var Generator = module.exports = function Generator(args, options) {
       callback: this._injectDependencies.bind(this)
     });
 
+    if (this.options.typescript) {
+      this._installTypings({
+        skipInstall: this.options['skip-install'],
+        skipMessage: this.options['skip-message']
+      });
+    }
+
     if (this.env.options.ngRoute) {
       this.invoke('angular:route', {
         args: ['about']
@@ -250,6 +257,7 @@ Generator.prototype.askForModules = function askForModules() {
 
     if (this.animateModule) {
       angMods.push("'ngAnimate'");
+      this.env.options.ngAnimate = true;
     }
 
     if (this.ariaModule) {
@@ -328,6 +336,33 @@ Generator.prototype.packageFiles = function packageFiles() {
   this.template('root/_package.json', 'package.json');
   this.template('root/_Gruntfile.js', 'Gruntfile.js');
   this.template('root/README.md', 'README.md');
+
+  if (this.env.options.typescript) {
+    this.template('root/_tsd.json', 'tsd.json');
+  }
+};
+
+Generator.prototype._installTypings = function(options) {
+
+  var command = chalk.yellow.bold('tsd reinstall');
+  options = options || {};
+
+  if (!options['skip-install']) {
+    if (!options['skip-message']) {
+      this.log.write('Running ' + command + ' for you to install the required typings. ' +
+        'If this fails, try running the command yourself.\n\n');
+    }
+
+    this.spawnCommand('tsd', ['reinstall'])
+      .on('exit', function (err) {
+        if (err === 127) {
+          this.log.error('Could not find tsd. Please install with ' +
+                              '`npm install -g tsd`.');
+        }
+      }.bind(this));
+  } else if (!options['skip-message']) {
+    this.log.write('Just run ' + command + ' to install the required dependencies.\n\n');
+  }
 };
 
 Generator.prototype._injectDependencies = function _injectDependencies() {

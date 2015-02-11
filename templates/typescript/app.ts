@@ -1,8 +1,9 @@
-/// <reference path="../../bower_components/dt-angular/angular.d.ts" /><% if (ngCookies) { %>
-/// <reference path="../../bower_components/dt-angular/angular-cookies.d.ts" /><% } %><% if (ngResource) { %>
-/// <reference path="../../bower_components/dt-angular/angular-resource.d.ts" /><% } %><% if (ngSanitize) { %>
-/// <reference path="../../bower_components/dt-angular/angular-sanitize.d.ts" /><% } %><% if (ngRoute) { %>
-/// <reference path="../../bower_components/dt-angular/angular-route.d.ts" /><% } %>
+/// <reference path="../../typings/angularjs/angular.d.ts" /><% if (ngAnimate) { %>
+/// <reference path="../../typings/angularjs/angular-animate.d.ts" /><% } %><% if (ngCookies) { %>
+/// <reference path="../../typings/angularjs/angular-cookies.d.ts" /><% } %><% if (ngResource) { %>
+/// <reference path="../../typings/angularjs/angular-resource.d.ts" /><% } %><% if (ngSanitize) { %>
+/// <reference path="../../typings/angularjs/angular-sanitize.d.ts" /><% } %><% if (ngRoute) { %>
+/// <reference path="../../typings/angularjs/angular-route.d.ts" /><% } %>
 
 'use strict';
 

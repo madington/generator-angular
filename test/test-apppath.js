@@ -96,6 +96,7 @@ describe('Angular generator appPath option', function () {
       angular.env.options.typescript = true;
       angular.run([], function () {
         helpers.assertFiles([].concat(expected, [
+          'tsd.json',
           appPath + '/scripts/app.ts',
           appPath + '/scripts/controllers/main.ts',
           'test/spec/controllers/main.ts'
